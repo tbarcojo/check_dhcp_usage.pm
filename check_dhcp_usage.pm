@@ -129,9 +129,10 @@ sub manage_selection {
     foreach my $instance (keys %$selected) {
         my $entry = $selected->{$instance};
         $self->{server}->{$instance} = {
+            # The instance becomes part of the perfdata label, so no spaces.
             display => $show_vdom
-                ? 'vdom ' . $entry->{vdom} . ' server ' . $entry->{server_id}
-                : 'server ' . $entry->{server_id},
+                ? 'vdom' . $entry->{vdom} . '_server' . $entry->{server_id}
+                : $entry->{server_id},
             leases => $entry->{leases}
         };
         $self->{global}->{leases} += $entry->{leases};
